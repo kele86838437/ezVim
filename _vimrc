@@ -1,7 +1,7 @@
 " -----------------   Author: Lei Duan
 " -----------------    Email: lei_d@qq.com
 " -----------------  WebSite: http://blog.satikey.com
-" -----------------     Date: 2012-08-31
+" -----------------     Date: 2012-08-31 14:10
 
 
 " Ctrl + H                   --光标移行首
@@ -37,7 +37,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "------------------------------------------------
-" => General
+" => Deps
 "------------------------------------------------
 
 set nocompatible               " Get out of VI's compatible mode
@@ -45,37 +45,6 @@ let mapleader=','              " Change the mapleader
 let maplocalleader='\'         " Change the maplocalleader
 set timeoutlen=500             " Time to wait for a command   
 scriptencoding utf-8           "  设置这个脚本的编码
- 
-autocmd BufWritePost .vimrc source $MYVIMRC  " Source the vimrc file after saving it
-nnoremap <Leader>v :tabedit $MYVIMRC<CR>     " Fast edit the .vimrc file using ',v'
-
-set autoread                                 " Set autoread when a file is changed outside
-set autowrite                                " Write on make/shell commands
-set hidden                                   " Turn on hidden"
-" set autowrite                              " automatically write a file when leaving a modified buffer
-set shortmess=atl
-set shortmess+=filmnrxoOtT                   " abbrev. of messages (avoids 'hit enter')
-
-                                             " better unix / windows compatibility
-set viewoptions=folds,options,cursor,unix,slash 
-set virtualedit=onemore                      " allow for cursor beyond last character
-
-set history=1000                             " Increase the lines of history
-set clipboard+=unnamed                       " Yanks go on clipboard instead
-set spell                                    " Spell checking on
-set modeline                                 " Turn on modeline
-set completeopt+=longest                     " Optimize auto complete
-set completeopt-=preview                     " Optimize auto complete
-
-set mousehide                                " Hide mouse after chars typed
-set mouse=a                                  " Mouse in all modes
-
-set backup                                   " Set backup
-if has('persistent_undo')
-    set undofile                            "so is persistent undo ...
-    set undolevels=1000                     "maximum number of changes that can be undone
-    set undoreload=10000                    "maximum number lines to save for undo on a buffer reload
-endif
 
 " 初始化一些文件夹
 function! InitializeDirectories()
@@ -90,7 +59,7 @@ function! InitializeDirectories()
         let directory=parent.'/'.prefix.'/'.dirname.'/'
         if !isdirectory(directory)
             if exists('*mkdir')
-                call mkdir(directory)
+                silent call mkdir(directory)
                 exec 'set '.settingname.'='.directory
             else
                 echo "Warning: Unable to create directory: ".directory
@@ -102,62 +71,19 @@ function! InitializeDirectories()
     endfor
 endfunction
 call InitializeDirectories()
-" Could use * rather than *.*, but I prefer to leave .files unsaved
-au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
-au BufWinEnter *.* silent! loadview "make vim load view (state) (folds, cursor, etc)
-"autocmd BufWinLeave *.* silent! mkview " Make Vim save view (state) (folds, cursor, etc)
-"autocmd BufWinEnter *.* silent! loadview " Make Vim load view (state) (folds, cursor, etc)
-     
-set tabstop=4                " 设置tab键的宽度
-set shiftwidth=4             " 换行时行间交错使用4个空格
-set autoindent               " 自动对齐
-set backspace=2              " 设置退格键可用
-set cindent shiftwidth=4     " 自动缩进4空格
-set shiftround               " Indent/outdent to nearest tabstop
-set expandtab                " Convert all tabs typed to spaces
-set smartindent              " 智能自动缩进
-set ai!                      " 设置自动缩进
-set nu!                      " 显示行号
-set showmatch                " 显示括号配对情况
-set mousehide                " Hide mouse after chars typed
-set mouse=a                  " 启用鼠标
-set ruler                    " 右下角显示光标位置的状态行
-set incsearch                " 开启实时搜索功能
-set hlsearch                 " 开启高亮显示结果
-set nowrapscan               " 搜索到文件两端时不重新搜索
-set nocompatible             " 关闭兼容模式
-set vb t_vb=                 " 关闭提示音
+"================================================================
 
-set backspace=indent,eol,start  " Make backspaces delete sensibly
-set whichwrap+=h,l,<,>,[,]      "  Backspace and cursor keys wrap to
-set virtualedit=block,onemore   " Allow for cursor beyond last character
-set scrolljump=5                " Lines to scroll when cursor leaves screen
-set scrolloff=3                 " Minimum lines to keep above and below cursor
-set sidescroll=1                " Minimal number of columns to scroll horizontally
-set sidescrolloff=10            " Minimal number of screen columns to keep away from cursor
 
-set wildmenu                    " Show list instead of just completing
-set wildmode=list:longest,full  " Use powerful wildmenu
+" DISABLE: done in exQuickFix { 
+" set quick fix error format
+" default errorformat = %f(%l) : %t%*\D%n: %m,%*[^"]"%f"%*\D%l: %m,%f(%l) : %m,%*[^ ] %f %l: %m,%f:%l:%c:%m,%f(%l):%m,%f:%l:%m,%f|%l| %m
+"set errorformat+=%D%\\d%\\+\>------\ %.%#Project:\ %f%\\,%.%# " msvc 2005 error-entering
+"set errorformat+=%D%\\d%\\+\>------\ %.%#Project:\ %f%\\,%.%# " msvc 2005 error-entering
+"set errorformat+=%X%\\d%\\+\>%.%#%\\d%\\+\ error(s)%.%#%\\d%\\+\ warning(s) " msvc 2005 error-leaving
+set errorformat+=%\\d%\\+\>%f(%l)\ :\ %t%*\\D%n:\ %m " msvc 2005 error-format
+"set errorformat+=%f(%l\\,%c):\ %m " fxc shader error-format
+" } DISABLE end 
 
-" Only have cursorline in current window and in normal window
-autocmd WinLeave * set nocursorline
-autocmd WinEnter * set cursorline
-auto InsertEnter * set nocursorline
-auto InsertLeave * set cursorline
-set cursorline               " 突出显示当前行
-set cursorcolumn             " 突出显示当前列
-
-set formatoptions+=rnlmM     " Optimize format options
-set hidden                   " 允许在有未保存的修改时切换缓冲区
-set list                     " 显示Tab符，使用一高亮竖线代替
-"set listchars=tab:\|\ ,
-set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
-"set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
-set linebreak                   " Wrap long lines at a blank
-set showbreak=↪                " Change wrap line break
-"showbreak=+++\ " (white space must be escaped)
-"set fillchars=diff:⣿,vert:│    " Change fillchars
-set fillchars=vert:\ ,stl:\ ,stlnc:\  " 在被分割的窗口间显示空白，便于阅读
 
 "blank      空白
 "buffers    缓冲区
@@ -170,6 +96,95 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\  " 在被分割的窗口间显示空白，�
 "slash      转换文件路径中的\为/以使session文件兼容unix
 "unix       设置session文件中的换行模式为unix
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,slash,unix,resize
+ 
+"-------------------------------------------------
+" => General
+"-------------------------------------------------
+syntax enable                " 打开语法高亮
+syntax on                    " 开启文件类型侦测
+filetype indent on           " 针对不同的文件类型采用不同的缩进格式
+filetype plugin on           " 针对不同的文件类型加载对应的插件
+filetype plugin indent on    " 启用自动补全
+
+set backspace=indent,eol,start  " Make backspaces delete sensibly
+set whichwrap+=h,l,<,>,[,]      "  Backspace and cursor keys wrap to
+set virtualedit=block,onemore   " Allow for cursor beyond last character
+set scrolljump=5                " Lines to scroll when cursor leaves screen
+set scrolloff=3                 " Minimum lines to keep above and below cursor
+set sidescroll=1                " Minimal number of columns to scroll horizontally
+set sidescrolloff=10            " Minimal number of screen columns to keep away from cursor
+             
+
+set shellredir=>%s\ 2>&1                     " Redefine the shell redirection operator to
+                                             " receive both the stderr messages and stdout messages
+set autoread                                 " Set autoread when a file is changed outside
+set autowrite                                " automatically write a file when leaving a modified buffer
+set history=1000    
+set updatetime=1000
+set backup                                   " Set backup
+if has('persistent_undo')
+    set undofile                            "so is persistent undo ...
+    set undolevels=1000                     "maximum number of changes that can be undone
+    set undoreload=10000                    "maximum number lines to save for undo on a buffer reload
+endif
+
+set shortmess=atl
+set shortmess+=filmnrxoOtT                   " abbrev. of messages (avoids 'hit enter')
+                                            
+set viewoptions=folds,options,cursor,unix,slash  " better unix / windows compatibility
+set virtualedit=onemore                      " allow for cursor beyond last character
+                        
+set clipboard+=unnamed                       " Yanks go on clipboard instead
+set spell                                    " Spell checking on
+set modeline                                 " Turn on modeline
+set completeopt+=longest                     " Optimize auto complete
+set completeopt-=preview                     " Optimize auto complete
+ 
+set autochdir                                " 设定文件浏览器目录为当前目录
+set nowrap                                   " 设置不自动换行
+set foldmethod=syntax                        " 选择代码折叠类型
+set foldlevel=100                            " 禁止自动折叠
+"================================================================
+
+"-------------------------------------------------
+" => Formatting
+"-------------------------------------------------
+set tabstop=4                " 设置tab键的宽度
+set shiftwidth=4             " 换行时行间交错使用4个空格
+set autoindent               " 自动对齐
+set backspace=2              " 设置退格键可用
+set cindent shiftwidth=4     " 自动缩进4空格
+set shiftround               " Indent/outdent to nearest tabstop
+set expandtab                " Convert all tabs typed to spaces
+set smartindent              " 智能自动缩进
+set ai!                      " 设置自动缩进
+set nu!                      " 显示行号
+set showmatch                " 显示括号配对情况
+set matchtime=0              " 0 second to show the matching paren ( much faster )
+set mousehide                " Hide mouse after chars typed
+set mouse=a                  " 启用鼠标
+set ruler                    " 右下角显示光标位置的状态行
+set incsearch                " 开启实时搜索功能
+set hlsearch                 " 开启高亮显示结果
+set nowrapscan               " 搜索到文件两端时不重新搜索
+set nocompatible             " 关闭兼容模式
+set vb t_vb=                 " 关闭提示音
+
+set wildmenu                    " Show list instead of just completing
+set wildmode=list:longest,full  " Use powerful wildmenu
+
+set formatoptions+=rnlmM     " Optimize format options
+set hidden                   " 允许在有未保存的修改时切换缓冲区
+set list                     " 显示Tab符，使用一高亮竖线代替
+"set listchars=tab:\|\ ,
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
+"set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
+set linebreak                   " Wrap long lines at a blank
+set showbreak=↪                " Change wrap line break
+"showbreak=+++\ " (white space must be escaped)
+"set fillchars=diff:⣿,vert:│    " Change fillchars
+set fillchars=vert:\ ,stl:\ ,stlnc:\  " 在被分割的窗口间显示空白，便于阅读
+"================================================================
 
 "-------------------------------------------------
 " => Vim User Interface
@@ -252,15 +267,11 @@ set cmdheight=1              " 命令行的高度，默认为1，这里设为2
 if has('gui_running') && (!has('win64') || !has('win32'))
   let g:Powerline_symbols='unicode'
 endif
-
+"================================================================
+ 
 "-------------------------------------------------
-" => Colors and Fonts
+" => GUI
 "-------------------------------------------------
-syntax enable                " 打开语法高亮
-syntax on                    " 开启文件类型侦测
-filetype indent on           " 针对不同的文件类型采用不同的缩进格式
-filetype plugin on           " 针对不同的文件类型加载对应的插件
-filetype plugin indent on    " 启用自动补全
 
 set background=dark  " Set background
 colorscheme desert       " 着色模式：蓝色背景
@@ -290,17 +301,72 @@ if has("gui_running")
     set guioptions-=b       " 隐藏底部滚动条
     "set showtabline=0       " 隐藏Tab栏
 endif
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 高级用法
+"if has("gui_running")
+    " check and determine the gui font after GUIEnter. 
+    " NOTE: getfontname function only works after GUIEnter.  
+    "au GUIEnter * call s:SetGuiFont() 
+"endif
 
-set autochdir                " 设定文件浏览器目录为当前目录
-"set nowrap                  " 设置不自动换行
-set foldmethod=syntax        " 选择代码折叠类型
-set foldlevel=100            " 禁止自动折叠
+"if has("gui_running")
+"    set lines=40 columns=130
+"endif
 
+" set guifont
+function s:SetGuiFont()
+    if has("gui_gtk2")
+        set guifont=Luxi\ Mono\ 13
+    elseif has("x11")
+        " Also for GTK 1
+        set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+    elseif has("mac")
+        if getfontname( "Bitstream_Vera_Sans_Mono" ) != ""
+            set guifont=Bitstream\ Vera\ Sans\ Mono:h13
+        elseif getfontname( "DejaVu\ Sans\ Mono" ) != ""
+            set guifont=DejaVu\ Sans\ Mono:h13
+        endif
+    elseif has("gui_win32")
+        let font_name = ""
+        if getfontname( "Bitstream_Vera_Sans_Mono" ) != ""
+            set guifont=Bitstream_Vera_Sans_Mono:h12:cANSI
+            let font_name = "Bitstream_Vera_Sans_Mono" 
+        elseif getfontname( "Consolas" ) != ""
+            set guifont=Consolas:h12:cANSI " this is the default visual studio font
+            let font_name = "Consolas" 
+        else
+            set guifont=Lucida_Console:h12:cANSI
+            let font_name = "Lucida_Console" 
+        endif
+        silent exec "nnoremap <unique> <M-F1> :set guifont=".font_name.":h11:cANSI<CR>"
+    endif
+endfunction
+"================================================================
+ 
+"-------------------------------------------------
+" => AutoCMD
+"-------------------------------------------------
+" Could use * rather than *.*, but I prefer to leave .files unsaved
+au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
+au BufWinEnter *.* silent! loadview "make vim load view (state) (folds, cursor, etc)
+"autocmd BufWinLeave *.* silent! mkview " Make Vim save view (state) (folds, cursor, etc)
+"autocmd BufWinEnter *.* silent! loadview " Make Vim load view (state) (folds, cursor, etc)
+
+autocmd BufWritePost .vimrc source $MYVIMRC  " Source the vimrc file after saving it
 " 每行超过80个的字符用下划线标示
 au BufRead,BufNewFile *.s,*.asm,*.h,*.c,*.cpp,*.cc,*.java,*.cs,*.erl,*.hs,*.sh,*.lua,*.pl,*.pm,*.php,*.py,*.rb,*.erb,*.vim,*.js,*.css,*.xml,*.html,*.xhtml 2match Underlined /.\%81v/
 
+" Only have cursorline in current window and in normal window
+autocmd WinLeave * set nocursorline
+autocmd WinEnter * set cursorline
+auto InsertEnter * set nocursorline
+auto InsertLeave * set cursorline
+set cursorline               " 突出显示当前行
+set cursorcolumn             " 突出显示当前列
+"================================================================
 
+"-------------------------------------------------
+" => Code 
+"-------------------------------------------------
 " 设置编码
 set fenc=utf-8
 set encoding=utf-8
@@ -309,9 +375,8 @@ set fileencodings=utf-8,gbk,cp936,latin-1
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 " 解决consle输出乱码
-language messages zh_CN.utf-8
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+language messages zh_CN.utf-8 
+"================================================================
 
 "-------------------------------------------------
 " => Platform Specific Configuration
@@ -324,95 +389,17 @@ endif
 
 set viewoptions+=slash,unix " Better Unix/Windows compatibility
 set fileformats=unix,mac,dos " Auto detect the file formats
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"================================================================
 
 "--------------------------------------------------
 " => Plugin
 "--------------------------------------------------
-
-filetype off " Required!
-let g:vundle_default_git_proto='git'
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" Let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-" UI Additions
-Bundle 'https://github.com/tomasr/molokai.git'
-colorscheme molokai
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'w0ng/vim-hybrid'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'mutewinter/vim-indent-guides'
-Bundle 'roman/golden-ratio'
-Bundle 'chrisbra/NrrwRgn'
-" Navigation
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'bkad/CamelCaseMotion'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'coderifous/textobj-word-column.vim'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'sjl/gundo.vim'
-if executable('ctags')
-    Bundle 'majutsushi/tagbar'
-endif
-Bundle 'Shougo/unite.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-if executable('ack-grep') || executable('ack')
-    Bundle 'mileszs/ack.vim'
-endif
-if executable('git')
-    Bundle 'tpope/vim-fugitive'
-endif
-Bundle 'benmills/vimux'
-" Commands
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-abolish'
-Bundle 'godlygeek/tabular'
-Bundle 'AndrewRadev/splitjoin.vim'
-Bundle 'mutewinter/swap-parameters'
-Bundle 'xuhdev/SingleCompile'
-" Automatic Helper
-Bundle 'Shougo/neocomplcache'
-Bundle 'garbas/vim-snipmate'
-Bundle 'Raimondi/delimitMate'
-Bundle 'scrooloose/syntastic'
-" Language related
-Bundle 'tpope/vim-rails'
-Bundle 'mattn/zencoding-vim'
-Bundle 'swaroopch/vim-markdown-preview'
-Bundle 'sampsyo/autolink.vim'
-
-" Others
-if executable('ctags')
-    Bundle 'xolox/vim-easytags'
-endif
-Bundle 'h1mesuke/unite-outline'
-Bundle 'tpope/vim-repeat'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/snipmate-snippets'
-
-" Local bundles if avaiable
-if filereadable(expand("~/.vimrc.bundles.local"))
-    source ~/.vimrc.bundles.local
-endif
-
-filetype plugin indent on " Required!
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
  
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "------------------------------------------------
 " => Key Mapping 
 "------------------------------------------------
+
+nnoremap <Leader>v :tabedit $MYVIMRC<CR>     " Fast edit the .vimrc file using ',v'
 
 " Ctrl + H            将光标移到行首
 imap <c-h> <ESC>I
@@ -500,9 +487,7 @@ nnoremap <Leader>q :%s/\s\+$//<CR>:let @/=''<CR>
 " See the differences between the current buffer and the file it was loaded from
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
     \ | diffthis | wincmd p | diffthis
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+"================================================================
 
 "------------------------------------------------
 " => Functions
@@ -538,6 +523,7 @@ function ClosePair(char)
 		return a:char
 	endif
 endf
+"================================================================
 
 "-------------------------------------------------
 " => Search Related
@@ -577,8 +563,8 @@ vnoremap # :<C-U>call <SID>VSetSearch()<CR>??<CR>
 
 " Use ,Space to toggle the highlight search
 nnoremap <Leader><Space> :set hlsearch!<CR>
+"================================================================
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "-------------------------------------------------
 " => Fold Related
 "-------------------------------------------------
@@ -603,8 +589,7 @@ function! MyFoldText()
     return line.'…'.repeat(" ",fillcharcount).foldedlinecount.'…'.' '
 endfunction
 set foldtext=MyFoldText()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"================================================================
 
 "-------------------------------------------------
 " => Filetype Specific
@@ -707,8 +692,8 @@ augroup ft_ruby
     autocmd!
     " TODO
 augroup END
+"================================================================
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 编译C源文件
 func! CompileGcc()
     exec "w"
@@ -792,9 +777,7 @@ vmap <c-c> <ESC>:call CompileCode()<CR>
 map <c-r> :call RunResult()<CR>
 imap <c-r> <ESC>:call RunResult()<CR>
 vmap <c-r> <ESC>:call RunResult()<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+"================================================================
 
 "--------------------------------------------------
 " => Local Setting
@@ -811,8 +794,7 @@ if has('gui_running')
         source ~/_gvimrc.local
     endif
 endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings
@@ -1067,3 +1049,156 @@ nnoremap <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>vc :VimuxClearRunnerHistory<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+" Bundles {
+    " Deps
+filetype off " Required!
+let g:vundle_default_git_proto='git'
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" Let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+ 
+" Local bundles if avaiable
+if filereadable(expand("~/.vimrc.bundles.local"))
+    source ~/.vimrc.bundles.local
+endif
+ 
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+if executable('ack-grep')
+    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+    Bundle 'mileszs/ack.vim'
+elseif executable('ack')
+    Bundle 'mileszs/ack.vim'
+endif
+
+" Use local bundles if available {
+    if filereadable(expand("~/.vimrc.bundles.local"))
+        source ~/.vimrc.bundles.local
+    endif
+" }
+ 
+ " General
+Bundle 'https://github.com/tomasr/molokai.git'    
+Bundle 'scrooloose/nerdtree'
+Bundle 'Shougo/unite.vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'spf13/vim-colors'
+Bundle 'tpope/vim-surround'
+Bundle 'AutoClose'
+Bundle 'kien/ctrlp.vim'
+Bundle 'vim-scripts/sessionman.vim'
+Bundle 'matchit.zip'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'godlygeek/csapprox'
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'corntrace/bufexplorer'
+Bundle 'chrisbra/NrrwRgn'
+Bundle 'mutewinter/vim-indent-guides'
+Bundle 'roman/golden-ratio'
+Bundle 'benmills/vimux'
+colorscheme molokai
+
+Bundle 'h1mesuke/unite-outline'
+Bundle 'tpope/vim-repeat'
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'honza/snipmate-snippets'
+
+Bundle 'Shougo/neocomplcache'
+Bundle 'garbas/vim-snipmate'
+Bundle 'Raimondi/delimitMate'
+Bundle 'scrooloose/syntastic'
+
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-abolish'
+Bundle 'godlygeek/tabular'
+Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'mutewinter/swap-parameters'
+Bundle 'xuhdev/SingleCompile'
+" Navigation
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'bkad/CamelCaseMotion'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'coderifous/textobj-word-column.vim'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'sjl/gundo.vim'
+       
+ 
+     
+            " Pick one of the checksyntax, jslint, or syntastic
+            Bundle 'scrooloose/syntastic'
+            Bundle 'garbas/vim-snipmate'
+            Bundle 'spf13/snipmate-snippets'
+            " Source support_function.vim to support snipmate-snippets.
+            if filereadable(expand("~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim"))
+                source ~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim
+            endif
+
+            Bundle 'tpope/vim-fugitive'
+            Bundle 'scrooloose/nerdcommenter'
+            Bundle 'godlygeek/tabular'
+            if executable('ctags')
+                Bundle 'xolox/vim-easytags'
+                Bundle 'majutsushi/tagbar'
+            endif
+            Bundle 'Shougo/neocomplcache'
+      
+
+    " PHP
+        
+            Bundle 'spf13/PIV'
+       
+
+    " Python
+        
+            " Pick either python-mode or pyflakes & pydoc
+            Bundle 'klen/python-mode'
+            Bundle 'python.vim'
+            Bundle 'python_match.vim'
+            Bundle 'pythoncomplete'
+       
+
+    " Javascript
+        
+            Bundle 'leshill/vim-json'
+            Bundle 'groenewege/vim-less'
+            Bundle 'taxilian/vim-web-indent'
+        
+
+    " HTML
+         
+            Bundle 'amirh/HTML-AutoCloseTag'
+            Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+      
+
+    " Ruby
+         
+            Bundle 'tpope/vim-rails'
+            let g:rubycomplete_buffer_loading = 1
+            "let g:rubycomplete_classes_in_global = 1
+            "let g:rubycomplete_rails = 1
+       
+    " Misc
+       
+            Bundle 'spf13/vim-markdown'
+            Bundle 'spf13/vim-preview'
+            Bundle 'tpope/vim-cucumber'
+            Bundle 'Puppet-Syntax-Highlighting'
+            Bundle 'tpope/vim-rails'
+            Bundle 'mattn/zencoding-vim'
+            Bundle 'swaroopch/vim-markdown-preview'
+            Bundle 'sampsyo/autolink.vim'
+
+    " Twig
+         
+            Bundle 'beyondwords/vim-twig'
+   
+  filetype plugin indent on " Required!
