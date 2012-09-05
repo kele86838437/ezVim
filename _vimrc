@@ -42,6 +42,7 @@
 
 set nocompatible               " Get out of VI's compatible mode
 let mapleader=','              " Change the mapleader
+let g:mapleader=','              " Change the mapleader
 let maplocalleader='\'         " Change the maplocalleader
 set timeoutlen=500             " Time to wait for a command   
 scriptencoding utf-8           "  设置这个脚本的编码
@@ -49,7 +50,7 @@ scriptencoding utf-8           "  设置这个脚本的编码
 " 初始化一些文件夹
 function! InitializeDirectories()
     let parent=$HOME
-    let prefix='.vim/data'
+    let prefix='.vim'
     let dir_list={
                 \ 'backup': 'backupdir',
                 \ 'view': 'viewdir',
@@ -117,6 +118,7 @@ set sidescrolloff=10            " Minimal number of screen columns to keep away 
 
 set shellredir=>%s\ 2>&1                     " Redefine the shell redirection operator to
                                              " receive both the stderr messages and stdout messages
+
 set autoread                                 " Set autoread when a file is changed outside
 set autowrite                                " automatically write a file when leaving a modified buffer
 set history=1000    
@@ -264,8 +266,9 @@ set cmdheight=1              " 命令行的高度，默认为1，这里设为2
 "endif
 " Set the style of the status line
 " Use vim-powerline to modify the statuls line
-if has('gui_running') && (!has('win64') || !has('win32'))
-  let g:Powerline_symbols='unicode'
+if has('gui_running') && (has('win64') || has('win32'))
+  "let g:Powerline_symbols='unicode'
+  let g:Powerline_symbols = 'fancy'
 endif
 "================================================================
  
@@ -291,7 +294,7 @@ endif
 "endif
 
 if has("gui_running")
-    "au GUIEnter * simalt ~x  " 窗口启动时自动最大化
+    au GUIEnter * simalt ~x  " 窗口启动时自动最大化
     "winpos 20 20            " 指定窗口出现的位置，坐标原点在屏幕左上角
     "set lines=20 columns=90 " 指定窗口大小，lines为高度，columns为宽度
     "set guioptions-=m       " 隐藏菜单栏
@@ -422,16 +425,16 @@ imap <c-s> <ESC>:w<CR>a
 vmap <c-s> <ESC>:w<CR>
  
 " Redesign moving keys in insert mode
-"inoremap <C-K> <Up>
-"inoremap <C-J> <Down>
-"inoremap <C-H> <Left>
-"inoremap <C-L> <Right>
+inoremap <C-K> <Up>
+inoremap <C-J> <Down>
+inoremap <C-H> <Left>
+inoremap <C-L> <Right>
 
 " Make j and k work the way you expect
-"nnoremap j gj
-"nnoremap k gk
-"vnoremap j gj
-"vnoremap k gk
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " Same when jumping around
 "nnoremap g; g;zz
@@ -779,23 +782,6 @@ imap <c-r> <ESC>:call RunResult()<CR>
 vmap <c-r> <ESC>:call RunResult()<CR>
 "================================================================
 
-"--------------------------------------------------
-" => Local Setting
-"--------------------------------------------------
-
-" Use local vimrc if available
-if filereadable(expand("~/_vimrc.local"))
-    source ~/_vimrc.local
-endif
-
-" Use local gvimrc if available and gui is running
-if has('gui_running')
-    if filereadable(expand("~/_gvimrc.local"))
-        source ~/_gvimrc.local
-    endif
-endif
-"================================================================
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -893,7 +879,7 @@ let delimitMate_balance_matchpairs=1
 
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_clear_cache_on_exit=0
-let g:ctrlp_cache_dir=$HOME.'/.vim/.cache/ctrlp'
+let g:ctrlp_cache_dir=$HOME.'/.vim/cache/ctrlp'
 let g:ctrlp_extensions=['tag', 'buffertag', 'quickfix', 'dir', 'rtscript']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -982,6 +968,7 @@ function! InitializeTagDirectory()
     endif
 endfunction
 call InitializeTagDirectory()
+
 let g:easytags_python_enabled=1
 let g:easytags_python_script=1
 let g:easytags_include_members=1
@@ -1160,10 +1147,10 @@ Bundle 'sjl/gundo.vim'
     " Python
         
             " Pick either python-mode or pyflakes & pydoc
-            Bundle 'klen/python-mode'
-            Bundle 'python.vim'
-            Bundle 'python_match.vim'
-            Bundle 'pythoncomplete'
+            "Bundle 'klen/python-mode'
+            "Bundle 'python.vim'
+            "Bundle 'python_match.vim'
+            "Bundle 'pythoncomplete'
        
 
     " Javascript
@@ -1202,3 +1189,19 @@ Bundle 'sjl/gundo.vim'
             Bundle 'beyondwords/vim-twig'
    
   filetype plugin indent on " Required!
+"--------------------------------------------------
+" => Local Setting
+"--------------------------------------------------
+
+" Use local vimrc if available
+if filereadable(expand("~/_vimrc.local"))
+    source ~/_vimrc.local
+endif
+
+" Use local gvimrc if available and gui is running
+if has('gui_running')
+    if filereadable(expand("~/_gvimrc.local"))
+        source ~/_gvimrc.local
+    endif
+endif
+"================================================================
