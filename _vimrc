@@ -1069,79 +1069,83 @@ endif
 " }
  
  " General
+ " Some Plugins 
 Bundle 'https://github.com/tomasr/molokai.git'    
-Bundle 'scrooloose/nerdtree'
-Bundle 'Shougo/unite.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'spf13/vim-colors'
-Bundle 'tpope/vim-surround'
-Bundle 'AutoClose'
-Bundle 'kien/ctrlp.vim'
-Bundle 'vim-scripts/sessionman.vim'
-Bundle 'matchit.zip'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'godlygeek/csapprox'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'corntrace/bufexplorer'
-Bundle 'chrisbra/NrrwRgn'
-Bundle 'mutewinter/vim-indent-guides'
-Bundle 'roman/golden-ratio'
-Bundle 'benmills/vimux'
 colorscheme molokai
 
-Bundle 'h1mesuke/unite-outline'
-Bundle 'tpope/vim-repeat'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/snipmate-snippets'
 
-Bundle 'Shougo/neocomplcache'
-Bundle 'garbas/vim-snipmate'
-Bundle 'Raimondi/delimitMate'
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/nerdtree'
+"Bundle 'Shougo/unite.vim'
+"Bundle 'altercation/vim-colors-solarized'
+"Bundle 'spf13/vim-colors'
+"Bundle 'tpope/vim-surround'
+"Bundle 'AutoClose'
+"Bundle 'kien/ctrlp.vim'
+"Bundle 'vim-scripts/sessionman.vim'
+"Bundle 'matchit.zip'
+"Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'godlygeek/csapprox'
+"Bundle 'jistr/vim-nerdtree-tabs'
+"Bundle 'flazz/vim-colorschemes'
+"Bundle 'corntrace/bufexplorer'
+"Bundle 'chrisbra/NrrwRgn'
+"Bundle 'mutewinter/vim-indent-guides'
+"Bundle 'roman/golden-ratio'
+"Bundle 'benmills/vimux'
 
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-abolish'
-Bundle 'godlygeek/tabular'
-Bundle 'AndrewRadev/splitjoin.vim'
-Bundle 'mutewinter/swap-parameters'
-Bundle 'xuhdev/SingleCompile'
+
+"Bundle 'h1mesuke/unite-outline'
+"Bundle 'tpope/vim-repeat'
+"Bundle 'jistr/vim-nerdtree-tabs'
+"Bundle 'MarcWeber/vim-addon-mw-utils'
+"Bundle 'tomtom/tlib_vim'
+"Bundle 'honza/snipmate-snippets'
+
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'garbas/vim-snipmate'
+"Bundle 'Raimondi/delimitMate'
+"Bundle 'scrooloose/syntastic'
+
+"Bundle 'scrooloose/nerdcommenter'
+"Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-abolish'
+"Bundle 'godlygeek/tabular'
+"Bundle 'AndrewRadev/splitjoin.vim'
+"Bundle 'mutewinter/swap-parameters'
+"Bundle 'xuhdev/SingleCompile'
 " Navigation
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'bkad/CamelCaseMotion'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'coderifous/textobj-word-column.vim'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'sjl/gundo.vim'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'bkad/CamelCaseMotion'
+"Bundle 'michaeljsmith/vim-indent-object'
+"Bundle 'coderifous/textobj-word-column.vim'
+"Bundle 'tpope/vim-unimpaired'
+"Bundle 'sjl/gundo.vim'
        
  
      
             " Pick one of the checksyntax, jslint, or syntastic
-            Bundle 'scrooloose/syntastic'
-            Bundle 'garbas/vim-snipmate'
-            Bundle 'spf13/snipmate-snippets'
-            " Source support_function.vim to support snipmate-snippets.
-            if filereadable(expand("~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim"))
-                source ~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim
-            endif
+"            Bundle 'scrooloose/syntastic'
+"            Bundle 'garbas/vim-snipmate'
+"            Bundle 'spf13/snipmate-snippets'
+"            " Source support_function.vim to support snipmate-snippets.
+"            if filereadable(expand("~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim"))
+"                source ~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim
+"            endif
 
-            Bundle 'tpope/vim-fugitive'
-            Bundle 'scrooloose/nerdcommenter'
-            Bundle 'godlygeek/tabular'
-            if executable('ctags')
-                Bundle 'xolox/vim-easytags'
-                Bundle 'majutsushi/tagbar'
-            endif
-            Bundle 'Shougo/neocomplcache'
+"            Bundle 'tpope/vim-fugitive'
+"           Bundle 'scrooloose/nerdcommenter'
+"            Bundle 'godlygeek/tabular'
+"            if executable('ctags')
+"                Bundle 'xolox/vim-easytags'
+"                Bundle 'majutsushi/tagbar'
+"            endif
+"            Bundle 'Shougo/neocomplcache'
       
 
     " PHP
         
-            Bundle 'spf13/PIV'
+"            Bundle 'spf13/PIV'
        
 
     " Python
@@ -1155,38 +1159,38 @@ Bundle 'sjl/gundo.vim'
 
     " Javascript
         
-            Bundle 'leshill/vim-json'
-            Bundle 'groenewege/vim-less'
-            Bundle 'taxilian/vim-web-indent'
+"            Bundle 'leshill/vim-json'
+"            Bundle 'groenewege/vim-less'
+"            Bundle 'taxilian/vim-web-indent'
         
 
     " HTML
          
-            Bundle 'amirh/HTML-AutoCloseTag'
-            Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+"            Bundle 'amirh/HTML-AutoCloseTag'
+"            Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
       
 
     " Ruby
          
-            Bundle 'tpope/vim-rails'
-            let g:rubycomplete_buffer_loading = 1
+"            Bundle 'tpope/vim-rails'
+"            let g:rubycomplete_buffer_loading = 1
             "let g:rubycomplete_classes_in_global = 1
             "let g:rubycomplete_rails = 1
        
     " Misc
        
-            Bundle 'spf13/vim-markdown'
-            Bundle 'spf13/vim-preview'
-            Bundle 'tpope/vim-cucumber'
-            Bundle 'Puppet-Syntax-Highlighting'
-            Bundle 'tpope/vim-rails'
-            Bundle 'mattn/zencoding-vim'
-            Bundle 'swaroopch/vim-markdown-preview'
-            Bundle 'sampsyo/autolink.vim'
+"            Bundle 'spf13/vim-markdown'
+"            Bundle 'spf13/vim-preview'
+"            Bundle 'tpope/vim-cucumber'
+"            Bundle 'Puppet-Syntax-Highlighting'
+"            Bundle 'tpope/vim-rails'
+"            Bundle 'mattn/zencoding-vim'
+"            Bundle 'swaroopch/vim-markdown-preview'
+"            Bundle 'sampsyo/autolink.vim'
 
     " Twig
          
-            Bundle 'beyondwords/vim-twig'
+"            Bundle 'beyondwords/vim-twig'
    
   filetype plugin indent on " Required!
 "--------------------------------------------------
