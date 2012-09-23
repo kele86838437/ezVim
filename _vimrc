@@ -815,9 +815,9 @@ let NERDTreeDirArrows=1
 " => NERD_commenter
 "--------------------------------------------------
 
-let NERDCommentWholeLinesInVMode=2
-let NERDSpaceDelims=1
-let NERDRemoveExtraSpaces=1
+"let NERDCommentWholeLinesInVMode=2
+"let NERDSpaceDelims=1
+"let NERDRemoveExtraSpaces=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -888,12 +888,12 @@ let g:ctrlp_extensions=['tag', 'buffertag', 'quickfix', 'dir', 'rtscript']
 " => Ack
 "--------------------------------------------------
 
-if executable('ack-grep') || executable('ack')
-    nnoremap <Leader>a :Ack!<Space>
-endif
-if has('unix') && executable('ack-grep')
-    let g:ackprg='ack-grep -H --nocolor --nogroup --column'
-endif
+"if executable('ack-grep') || executable('ack')
+""    nnoremap <Leader>a :Ack!<Space>
+"endif
+"if has('unix') && executable('ack-grep')
+""    let g:ackprg='ack-grep -H --nocolor --nogroup --column'
+"endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -927,14 +927,14 @@ let g:indent_guides_guide_size=1
 " => fugitive
 "--------------------------------------------------
 
-if executable('git')
-    nnoremap <silent> <leader>gs :Gstatus<CR>
-    nnoremap <silent> <leader>gd :Gdiff<CR>
-    nnoremap <silent> <leader>gc :Gcommit<CR>
-    nnoremap <silent> <leader>gb :Gblame<CR>
-    nnoremap <silent> <leader>gl :Glog<CR>
-    nnoremap <silent> <leader>gp :Git push<CR>
-endif
+"if executable('git')
+""    nnoremap <silent> <leader>gs :Gstatus<CR>
+""    nnoremap <silent> <leader>gd :Gdiff<CR>
+""    nnoremap <silent> <leader>gc :Gcommit<CR>
+""    nnoremap <silent> <leader>gb :Gblame<CR>
+""    nnoremap <silent> <leader>gl :Glog<CR>
+""    nnoremap <silent> <leader>gp :Git push<CR>
+"endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -980,8 +980,8 @@ highlight cMember gui=italic
 " => SingleCompile
 "--------------------------------------------------
 
-nnoremap <Leader>r :SingleCompileRun<CR>
-let g:SingleCompile_showquickfixiferror=1
+"nnoremap <Leader>r :SingleCompileRun<CR>
+"let g:SingleCompile_showquickfixiferror=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -999,9 +999,9 @@ let g:user_zen_settings={'indentation':'   '}
 "--------------------------------------------------
 
 " Disable Golden Ratio plugin when in diff mode
-if &diff
-  let g:loaded_golden_ratio=1
-endif
+"if &diff
+""  let g:loaded_golden_ratio=1
+"endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -1009,10 +1009,10 @@ endif
 " => Splitjoin
 "--------------------------------------------------
 
-nnoremap sj :SplitjoinSplit<CR>
-nnoremap sk :SplitjoinJoin<CR>
-let g:splitjoin_normalize_whitespace=1
-let g:splitjoin_align=1
+"nnoremap sj :SplitjoinSplit<CR>
+"nnoremap sk :SplitjoinJoin<CR>
+"let g:splitjoin_normalize_whitespace=1
+"let g:splitjoin_align=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -1020,20 +1020,20 @@ let g:splitjoin_align=1
 " => Unite
 "--------------------------------------------------
 
-nnoremap <Leader>m :Unite<Space>
+"nnoremap <Leader>m :Unite<Space>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "--------------------------------------------------
 " => vimux
 "--------------------------------------------------
 
-nnoremap <Leader>vp :VimuxPromptCommand<CR>
-vnoremap <Leader>vs "vy :call VimuxRunCommand(@v . "\n", 0)<CR>
-nnoremap <Leader>vx :VimuxClosePanes<CR>
-nnoremap <Leader>vq :VimuxCloseRunner<CR>
-nnoremap <Leader>vi :VimuxInspectRunner<CR>
-nnoremap <Leader>vl :VimuxRunLastCommand<CR>
-nnoremap <Leader>vc :VimuxClearRunnerHistory<CR>
+"nnoremap <Leader>vp :VimuxPromptCommand<CR>
+"vnoremap <Leader>vs "vy :call VimuxRunCommand(@v . "\n", 0)<CR>
+"nnoremap <Leader>vx :VimuxClosePanes<CR>
+"nnoremap <Leader>vq :VimuxCloseRunner<CR>
+"nnoremap <Leader>vi :VimuxInspectRunner<CR>
+"nnoremap <Leader>vl :VimuxRunLastCommand<CR>
+"nnoremap <Leader>vc :VimuxClearRunnerHistory<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -1068,131 +1068,30 @@ endif
     endif
 " }
  
- " General
- " Some Plugins 
+ " Bundle Plugins
+ "==============================
 Bundle 'https://github.com/tomasr/molokai.git'    
 colorscheme molokai
+Bundle 'Lokaltog/vim-powerline'
 
+Bundle 'honza/snipmate-snippets'
+Bundle 'scrooloose/nerdtree'
+Bundle 'garbas/vim-snipmate'
+Bundle 'corntrace/bufexplorer
+Bundle 'Shougo/neocomplcache'
+Bundle 'sjl/gundo.vim'
 
-"Bundle 'scrooloose/nerdtree'
-"Bundle 'Shougo/unite.vim'
-"Bundle 'altercation/vim-colors-solarized'
-"Bundle 'spf13/vim-colors'
-"Bundle 'tpope/vim-surround'
-"Bundle 'AutoClose'
-"Bundle 'kien/ctrlp.vim'
-"Bundle 'vim-scripts/sessionman.vim'
-"Bundle 'matchit.zip'
-"Bundle 'Lokaltog/vim-powerline'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'godlygeek/csapprox'
-"Bundle 'jistr/vim-nerdtree-tabs'
-"Bundle 'flazz/vim-colorschemes'
-"Bundle 'corntrace/bufexplorer'
-"Bundle 'chrisbra/NrrwRgn'
-"Bundle 'mutewinter/vim-indent-guides'
-"Bundle 'roman/golden-ratio'
-"Bundle 'benmills/vimux'
+"PHP
+Bundle 'spf13/PIV'
+Bundle 'kien/ctrlp.vim'
 
-
-"Bundle 'h1mesuke/unite-outline'
-"Bundle 'tpope/vim-repeat'
-"Bundle 'jistr/vim-nerdtree-tabs'
-"Bundle 'MarcWeber/vim-addon-mw-utils'
-"Bundle 'tomtom/tlib_vim'
-"Bundle 'honza/snipmate-snippets'
-
-"Bundle 'Shougo/neocomplcache'
-"Bundle 'garbas/vim-snipmate'
-"Bundle 'Raimondi/delimitMate'
-"Bundle 'scrooloose/syntastic'
-
-"Bundle 'scrooloose/nerdcommenter'
-"Bundle 'tpope/vim-surround'
-"Bundle 'tpope/vim-abolish'
-"Bundle 'godlygeek/tabular'
-"Bundle 'AndrewRadev/splitjoin.vim'
-"Bundle 'mutewinter/swap-parameters'
-"Bundle 'xuhdev/SingleCompile'
-" Navigation
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'bkad/CamelCaseMotion'
-"Bundle 'michaeljsmith/vim-indent-object'
-"Bundle 'coderifous/textobj-word-column.vim'
-"Bundle 'tpope/vim-unimpaired'
-"Bundle 'sjl/gundo.vim'
-       
- 
-     
-            " Pick one of the checksyntax, jslint, or syntastic
-"            Bundle 'scrooloose/syntastic'
-"            Bundle 'garbas/vim-snipmate'
-"            Bundle 'spf13/snipmate-snippets'
-"            " Source support_function.vim to support snipmate-snippets.
-"            if filereadable(expand("~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim"))
-"                source ~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim
-"            endif
-
-"            Bundle 'tpope/vim-fugitive'
-"           Bundle 'scrooloose/nerdcommenter'
-"            Bundle 'godlygeek/tabular'
-"            if executable('ctags')
-"                Bundle 'xolox/vim-easytags'
-"                Bundle 'majutsushi/tagbar'
-"            endif
-"            Bundle 'Shougo/neocomplcache'
-      
-
-    " PHP
-        
-"            Bundle 'spf13/PIV'
-       
-
-    " Python
-        
-            " Pick either python-mode or pyflakes & pydoc
-            "Bundle 'klen/python-mode'
-            "Bundle 'python.vim'
-            "Bundle 'python_match.vim'
-            "Bundle 'pythoncomplete'
-       
-
-    " Javascript
-        
-"            Bundle 'leshill/vim-json'
-"            Bundle 'groenewege/vim-less'
-"            Bundle 'taxilian/vim-web-indent'
-        
-
-    " HTML
-         
-"            Bundle 'amirh/HTML-AutoCloseTag'
-"            Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
-      
-
-    " Ruby
-         
-"            Bundle 'tpope/vim-rails'
-"            let g:rubycomplete_buffer_loading = 1
-            "let g:rubycomplete_classes_in_global = 1
-            "let g:rubycomplete_rails = 1
-       
-    " Misc
-       
-"            Bundle 'spf13/vim-markdown'
-"            Bundle 'spf13/vim-preview'
-"            Bundle 'tpope/vim-cucumber'
-"            Bundle 'Puppet-Syntax-Highlighting'
-"            Bundle 'tpope/vim-rails'
-"            Bundle 'mattn/zencoding-vim'
-"            Bundle 'swaroopch/vim-markdown-preview'
-"            Bundle 'sampsyo/autolink.vim'
-
-    " Twig
-         
-"            Bundle 'beyondwords/vim-twig'
+" HTML
+Bundle 'mattn/zencoding-vim'
+Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
    
   filetype plugin indent on " Required!
+"==============================
 "--------------------------------------------------
 " => Local Setting
 "--------------------------------------------------
